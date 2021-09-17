@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cart"
+    android:padding="8dp"
+    android:background="@drawable/wallpaper">
+
+    <TextView
+        android:id="@+id/totalprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_place_order"
+        android:text="Total Price: RM20.21"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:textSize="25sp"
+        android:layout_marginBottom="21dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/btn_place_order"
+        android:text="PLACE ORDER"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/totalprice">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

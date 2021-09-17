@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1079300058354",
+    "firebase_url": "https://evergreen-af6a9-default-rtdb.firebaseio.com",
+    "project_id": "evergreen-af6a9",
+    "storage_bucket": "evergreen-af6a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079300058354:android:8055cd35a02aadcf2f346b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079300058354-1v74d8tfhng7uubque927o25oknplerh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFGA8eJEbnsSs4ffyJtpLcQxTWQ6sV-1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079300058354-1v74d8tfhng7uubque927o25oknplerh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

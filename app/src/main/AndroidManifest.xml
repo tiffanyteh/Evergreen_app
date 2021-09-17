@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
+
+    <uses-feature android:name="android.hardware.camera.ar" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_evergreen"
+        android:label="Evergreen"
+        android:roundIcon="@mipmap/ic_evergreen_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:label">
+        <activity android:name=".plantsize"></activity>
+        <activity android:name=".OrderDetails" />
+        <activity android:name=".MyOrders" />
+        <activity android:name=".Receipt" />
+        <activity android:name=".Payment" />
+        <activity android:name=".SearchList" />
+        <activity android:name=".ARList" />
+        <activity android:name=".Wishlist" />
+        <activity android:name=".editProfile" />
+        <activity android:name=".TreeList" />
+        <activity android:name=".PalmTreeList" />
+        <activity android:name=".CactusList" />
+        <activity android:name=".FlowerList" />
+        <activity android:name=".Cart" />
+        <activity android:name=".ShowDetails" />
+        <activity android:name=".category" />
+        <activity android:name=".profile" />
+        <activity android:name=".home" />
+        <activity android:name=".onboarding2" />
+        <activity android:name=".onboarding1" />
+        <activity android:name=".signup" />
+        <activity android:name=".login" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MainScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ARMain" />
+
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
+    </application>
+
+</manifest>
