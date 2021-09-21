@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ public class Cart extends AppCompatActivity {
     RecyclerView recyler_cart;
     Button btn_place_order;
     TextView totalprice;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,15 @@ public class Cart extends AppCompatActivity {
 
         btn_place_order = (Button)findViewById(R.id.btn_place_order);
         totalprice = (TextView)findViewById(R.id.totalprice);
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
 
         btn_place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference table_user = database.getReference("User").
-                        child(Common.currentUser.getName());
+                        child(firebaseUser.getUid());
                 table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

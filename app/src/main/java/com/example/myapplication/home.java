@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,7 @@ public class home extends AppCompatActivity {
     private TextView name;
     private EditText searchplant;
     DatabaseReference reference1;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +58,15 @@ public class home extends AppCompatActivity {
         searchplant = (EditText)findViewById(R.id.searchplant);
         searchicon = (ImageView)findViewById(R.id.searchicon);
         profilepic = (ImageView)findViewById(R.id.profilepic);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         reference1 = FirebaseDatabase.getInstance().getReference("User");
+
 
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                String link = datasnapshot.child(Common.currentUser.getName()).child("pic").
+                String link = datasnapshot.child(firebaseUser.getUid()).child("pic").
                         getValue(String.class);
                 Picasso.get().load(link).into(profilepic);
 

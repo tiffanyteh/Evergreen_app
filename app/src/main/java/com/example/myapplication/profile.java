@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +45,7 @@ public class profile extends AppCompatActivity {
     private StorageReference storageReference;
     private ImageView profilepic;
     DatabaseReference reference, reference1;
-
+    private FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -65,12 +67,14 @@ public class profile extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         profilepic = (ImageView)findViewById(R.id.profilepic);
+        firebaseAuth = FirebaseAuth.getInstance();
         reference1 = FirebaseDatabase.getInstance().getReference("User");
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
 
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                String link = datasnapshot.child(Common.currentUser.getName()).child("pic").
+                String link = datasnapshot.child(firebaseUser.getUid()).child("pic").
                         getValue(String.class);
                 Picasso.get().load(link).into(profilepic);
 
@@ -119,6 +123,7 @@ public class profile extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firebaseAuth.signOut();
                 Intent i = new Intent(profile.this, MainActivity.class);
                 startActivity(i);
             }
@@ -185,6 +190,7 @@ public class profile extends AppCompatActivity {
     }
 
     private void uploadPicture(){
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         final ProgressDialog pd = new ProgressDialog(this);
 
         pd.setTitle("Uploading Image...");
@@ -202,7 +208,7 @@ public class profile extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 pd.dismiss();
                                 reference = FirebaseDatabase.getInstance().getReference("User");
-                                reference.child(Common.currentUser.getName()).child("pic").
+                                reference.child(firebaseUser.getUid()).child("pic").
                                         setValue(uri.toString());
                                 Toast.makeText(profile.this, "Image Uploaded",
                                         Toast.LENGTH_SHORT).show();

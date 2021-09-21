@@ -22,15 +22,15 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.219" />
 
     <EditText
-        android:inputType="textPassword"
-        android:id="@+id/password1"
+        android:id="@+id/email1"
         android:layout_width="250dp"
         android:layout_height="55dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit"
-        android:hint="Password"
+        android:hint="Email"
         android:text=""
         android:textAlignment="center"
         android:textColor="#000000"
@@ -39,20 +39,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374" />
+        app:layout_constraintTop_toBottomOf="@+id/username1"
+        app:layout_constraintVertical_bias="0.035" />
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edit"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email1"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintVertical_bias="0.035"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/signupbtn1"
         android:layout_width="250dp"
         android:layout_height="55dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/signupbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/password1"
+        app:layout_constraintVertical_bias="0.046" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
