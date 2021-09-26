@@ -1,11 +1,13 @@
 package Adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,6 +81,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
                                 Acacia.getRef().removeValue();
                                 tree.remove(position);
                                 notifyDataSetChanged();
+                                Toast.makeText(holder.itemView.getContext(), "Item Removed From Wishlist",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
 

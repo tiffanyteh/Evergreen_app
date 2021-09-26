@@ -61,7 +61,7 @@ public class ShowDetails extends AppCompatActivity {
                 for(DataSnapshot Acacia: dataSnapshot.getChildren()){
                     String planttitle = Acacia.getValue(String.class);
                     if(planttitle.equals(titleTxt.getText().toString())){
-                        wishlist.setEnabled(false);
+                        wishlist.setText("Remove From WishList");
                     }
                 }
             }
@@ -72,33 +72,66 @@ public class ShowDetails extends AppCompatActivity {
             }
         });
 
+
+
         wishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                table_wishlist.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child(Common.currentUser.getName()).exists()){
-                            table_wishlist.child(Common.currentUser.getName()).push().
-                                    setValue(titleTxt.getText().toString());
-                            Toast.makeText(ShowDetails.this, "Added to Wishlist",
-                                    Toast.LENGTH_SHORT).show();
-                            wishlist.setEnabled(false);
-                        }
-                        else{
-                            table_wishlist.child(Common.currentUser.getName()).push().
-                                    setValue(titleTxt.getText().toString());
-                            Toast.makeText(ShowDetails.this, "Added to Wishlist",
-                                    Toast.LENGTH_SHORT).show();
-                            wishlist.setEnabled(false);
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                //check if item is already wishlisted
+                String text = wishlist.getText().toString();
 
-                    }
-                });
+                if(text.equals("Remove From WishList")){
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference table_wishlist1 = database.getReference("Wishlist").
+                            child("User").child(Common.currentUser.getName());
+
+                    table_wishlist1.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for(DataSnapshot Acacia: dataSnapshot.getChildren()){
+                                String planttitle = Acacia.getValue(String.class);
+                                if(planttitle.equals(titleTxt.getText().toString())){
+                                    Acacia.getRef().removeValue();
+                                    wishlist.setText("Add To WishList");
+                                    Toast.makeText(ShowDetails.this, "Item Removed From Wishlist",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }else{
+                    table_wishlist.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.child(Common.currentUser.getName()).exists()){
+                                table_wishlist.child(Common.currentUser.getName()).push().
+                                        setValue(titleTxt.getText().toString());
+                                Toast.makeText(ShowDetails.this, "Added to Wishlist",
+                                        Toast.LENGTH_SHORT).show();
+                                wishlist.setText("Remove From WishList");
+                            }
+                            else{
+                                table_wishlist.child(Common.currentUser.getName()).push().
+                                        setValue(titleTxt.getText().toString());
+                                Toast.makeText(ShowDetails.this, "Added to Wishlist",
+                                        Toast.LENGTH_SHORT).show();
+                                wishlist.setText("Remove From WishList");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
 
@@ -150,10 +183,13 @@ public class ShowDetails extends AppCompatActivity {
                                 String planttitle = Acacia.child("name").getValue(String.class);
                                 if(planttitle.equals(titleTxt.getText().toString())){
                                     Acacia.getRef().removeValue();
+                                    Double subprice = Double.parseDouble(priceTxt.getText().toString())
+                                            * Integer.parseInt(numberOrderTxt.getText().toString());
+
                                     CartItem cartItem = new CartItem(titleTxt.getText().toString(),
-                                            Double.parseDouble(priceTxt.getText().toString()),
+                                            subprice,
                                             Integer.parseInt(numberOrderTxt.getText().toString()),
-                                            object.getPic());
+                                            object.getPic(), Double.parseDouble(priceTxt.getText().toString()));
                                     table_cart.child(Common.currentUser.getName()).push().setValue(cartItem);
                                     count = count + 1;
                                     Toast.makeText(ShowDetails.this, "Item Added to Cart!",
@@ -162,10 +198,12 @@ public class ShowDetails extends AppCompatActivity {
                                 }
                             }
                             if(count<1){
+                                Double subprice = Double.parseDouble(priceTxt.getText().toString())
+                                        * Integer.parseInt(numberOrderTxt.getText().toString());
                                 CartItem cartItem = new CartItem(titleTxt.getText().toString(),
-                                        Double.parseDouble(priceTxt.getText().toString()),
+                                        subprice,
                                         Integer.parseInt(numberOrderTxt.getText().toString()),
-                                        object.getPic());
+                                        object.getPic(), Double.parseDouble(priceTxt.getText().toString()));
                                 table_cart.child(Common.currentUser.getName()).push().setValue(cartItem);
                                 Toast.makeText(ShowDetails.this, "Item Added to Cart!",
                                         Toast.LENGTH_SHORT).show();
@@ -174,10 +212,12 @@ public class ShowDetails extends AppCompatActivity {
 
                         }
                         else{
+                            Double subprice = Double.parseDouble(priceTxt.getText().toString())
+                                    * Integer.parseInt(numberOrderTxt.getText().toString());
                             CartItem cartItem = new CartItem(titleTxt.getText().toString(),
-                                    Double.parseDouble(priceTxt.getText().toString()),
+                                    subprice,
                                     Integer.parseInt(numberOrderTxt.getText().toString()),
-                                    object.getPic());
+                                    object.getPic(),Double.parseDouble(priceTxt.getText().toString()));
                             table_cart.child(Common.currentUser.getName()).push().setValue(cartItem);
                             Toast.makeText(ShowDetails.this, "Item Added to Cart!",
                                     Toast.LENGTH_SHORT).show();

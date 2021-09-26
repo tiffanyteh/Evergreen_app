@@ -2,7 +2,6 @@ package Domain;
 
 public class User {
     private String Name;
-    private String Password;
     private String email;
     private String phoneno;
     private String address;
@@ -12,9 +11,8 @@ public class User {
 
     }
 
-    public User(String name, String password, String email, String phoneno, String address, String pic) {
+    public User(String name, String email, String phoneno, String address, String pic) {
         Name = name;
-        Password = password;
         this.email = email;
         this.phoneno = phoneno;
         this.address = address;
@@ -61,11 +59,4 @@ public class User {
         Name = name;
     }
 
-    public String getPassword(){
-        return Password;
-    }
-
-    public void setPassword(String password){
-        Password = password;
-    }
 }

@@ -64,7 +64,8 @@ public class MyOrders extends AppCompatActivity {
                     String amount = Acacia.child("amount").getValue(String.class);
                     Double total = Acacia.child("total").getValue(Double.class);
                     String orderid = Acacia.child("orderid").getValue(String.class);
-                    orders.add(new Order(name, title, total, amount, price, address, phone,orderid));
+                    String date = Acacia.child("date").getValue(String.class);
+                    orders.add(new Order(name, title, total, amount, price, address, phone,orderid,date));
 
                 }
 

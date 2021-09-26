@@ -17,7 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 import Domain.Common;
@@ -30,6 +32,9 @@ public class Payment extends AppCompatActivity {
     String title1="";
     String amount1="";
     String price1="";
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
 
     @Override
@@ -51,17 +56,15 @@ public class Payment extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Double> prices = new ArrayList<>();
                 for(DataSnapshot Acacia: dataSnapshot.getChildren()){
-                    int amount = Acacia.child("amount").getValue(Integer.class);
                     Double price = Acacia.child("price").getValue(Double.class);
-                    Double initalp = price * amount;
-                    prices.add(Double.valueOf(initalp));
+                    prices.add(price);
                 }
                 int size= prices.size();
                 Double total=0.0;
                 for(int i=0; i<size;i++){
                     total = total + prices.get(i);
                 }
-                txtDes.setText(String.format("%.2f", total));
+                txtDes.setText("RM" + String.format("%.2f", total));
 
             }
 
@@ -96,11 +99,11 @@ public class Payment extends AppCompatActivity {
                             if (i==0){
                                 title1 = title1 + title;
                                 amount1 = amount1 + amount;
-                                price1 = price1 + price;
+                                price1 = price1 + String.format("%.2f", price);
                             }else{
-                                title1 = title1 + ", " + title;
-                                amount1 = amount1 + ", " + amount;
-                                price1 = price1 + ", " + price;
+                                title1 = title1 + "," + title;
+                                amount1 = amount1 + "," + amount;
+                                price1 = price1 + "," + String.format("%.2f", price);
                             }
                             i++;
 
@@ -110,10 +113,16 @@ public class Payment extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.child(Common.currentUser.getName()).exists()){
+                                    String temp = txtDes.getText().toString();
+                                    String total = temp.replace("RM","");
+                                    calendar = Calendar.getInstance();
+                                    dateFormat = new SimpleDateFormat("MM/dd/yyyy h:mm a");
+                                    date = dateFormat.format(calendar.getTime());
                                     Order order = new Order(Common.currentUser.getName(),title1,
-                                            Double.parseDouble(txtDes.getText().toString()),
+                                            Double.parseDouble(total),
                                             amount1,price1,Common.currentUser.getAddress(),
-                                            Common.currentUser.getPhoneno(), UUID.randomUUID().toString());
+                                            Common.currentUser.getPhoneno(), UUID.randomUUID().toString(),
+                                            date);
                                     table_order.child(Common.currentUser.getName()).push().setValue(order);
                                     Toast.makeText(Payment.this, "Thank you for your payment!",
                                             Toast.LENGTH_SHORT).show();
@@ -122,10 +131,15 @@ public class Payment extends AppCompatActivity {
                                     startActivity(i);
                                 }
                                 else{
+                                    calendar = Calendar.getInstance();
+                                    dateFormat = new SimpleDateFormat("MM/dd/yyyy h:mm a");
+                                    date = dateFormat.format(calendar.getTime());
+                                    String temp = txtDes.getText().toString();
+                                    String total = temp.replace("RM","");
                                     Order order = new Order(Common.currentUser.getName(),title1,
-                                            Double.parseDouble(txtDes.getText().toString()),
+                                            Double.parseDouble(total),
                                             amount1,price1,Common.currentUser.getAddress(),
-                                            Common.currentUser.getPhoneno(),UUID.randomUUID().toString());
+                                            Common.currentUser.getPhoneno(),UUID.randomUUID().toString(),date);
                                     table_order.child(Common.currentUser.getName()).push().setValue(order);
                                     Toast.makeText(Payment.this, "Thank you for your payment!",
                                             Toast.LENGTH_SHORT).show();
@@ -157,6 +171,7 @@ public class Payment extends AppCompatActivity {
                             Acacia.child("name").getRef().removeValue();
                             Acacia.child("pic").getRef().removeValue();
                             Acacia.child("price").getRef().removeValue();
+                            Acacia.child("oriprice").getRef().removeValue();
                         }
                     }
 

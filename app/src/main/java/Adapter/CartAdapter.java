@@ -51,8 +51,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.txt_amount.setText(String.valueOf(cartItemList.get(position).getAmount()));
 
-        holder.txt_price.setText(new StringBuilder("RM").append(cartItemList.get(position).
-                getPrice()));
+        holder.txt_price.setText(String.format("%.2f", cartItemList.get(position).getPrice()));
         holder.txt_product_name.setText(cartItemList.get(position).getName());
 
         holder.deleteicon.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +91,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onClick(View v) {
                 int numberOrder;
+                Double priceOrder;
+                priceOrder = cartItemList.get(position).getPrice();
                 numberOrder = cartItemList.get(position).getAmount();
                 numberOrder = numberOrder + 1;
+                priceOrder = priceOrder + cartItemList.get(position).getOriprice();
+                holder.txt_price.setText(String.format("%.2f", priceOrder));
                 holder.txt_amount.setText(String.valueOf(numberOrder));
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference table_cart = database.getReference("Cart").child("User").
@@ -108,6 +111,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                             if(planttitle.equals(cartItemList.get(position).getName())){
                                 table_cart.child(key).child("amount").setValue(
                                         Integer.parseInt(holder.txt_amount.getText().toString()));
+                                table_cart.child(key).child("price").setValue(
+                                        Double.parseDouble(holder.txt_price.getText().toString()));
                             }
                         }
                         Intent intent = new Intent (holder.itemView.getContext(), Cart.class);
@@ -129,9 +134,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onClick(View v) {
                 int numberOrder;
+                Double priceOrder;
+                priceOrder = cartItemList.get(position).getPrice();
                 numberOrder = cartItemList.get(position).getAmount();
                 if(numberOrder>1){
                     numberOrder = numberOrder - 1;
+                    priceOrder = priceOrder - cartItemList.get(position).getOriprice();
+                    holder.txt_price.setText(String.format("%.2f", priceOrder));
                 }
                 holder.txt_amount.setText(String.valueOf(numberOrder));
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -147,6 +156,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                             if(planttitle.equals(cartItemList.get(position).getName())){
                                 table_cart.child(key).child("amount").setValue(
                                         Integer.parseInt(holder.txt_amount.getText().toString()));
+                                table_cart.child(key).child("price").setValue(
+                                        Double.parseDouble(holder.txt_price.getText().toString()));
                             }
                         }
                         Intent intent = new Intent (holder.itemView.getContext(), Cart.class);

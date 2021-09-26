@@ -79,7 +79,7 @@ public class editProfile extends AppCompatActivity {
                 if(!Common.currentUser.getName().equals(username.getText().toString())){
                     reference.child(firebaseUser.getUid()).child("name").
                             setValue(username.getText().toString());
-                    Common.currentUser.setPassword(username.getText().toString());
+                    Common.currentUser.setName(username.getText().toString());
 
                 }
 

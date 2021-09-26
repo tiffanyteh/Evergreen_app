@@ -91,9 +91,9 @@ public class Cart extends AppCompatActivity {
                     String pic = Acacia.child("pic").getValue(String.class);
                     int amount = Acacia.child("amount").getValue(Integer.class);
                     Double price = Acacia.child("price").getValue(Double.class);
-                    Double initalp = price * amount;
-                    prices.add(Double.valueOf(initalp));
-                    cartItemList.add(new CartItem(title, price, amount, pic));
+                    Double oriprice = Acacia.child("oriprice").getValue(Double.class);
+                    prices.add(price);
+                    cartItemList.add(new CartItem(title, price, amount, pic, oriprice));
                 }
                 int size= prices.size();
                 Double total=0.0;

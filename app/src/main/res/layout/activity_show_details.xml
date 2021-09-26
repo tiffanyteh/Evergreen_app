@@ -139,7 +139,7 @@
         android:background="@drawable/btn_back2"
         android:elevation="3dp"
         android:gravity="center"
-        android:text="WishList"
+        android:text="Add To WishList"
         android:textColor="#ffffff"
         android:textSize="23sp"
         android:textStyle="bold"

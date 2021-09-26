@@ -12,7 +12,7 @@ import Domain.Order;
 
 public class OrderDetails extends AppCompatActivity {
     private Button done;
-    private TextView name, phoneno, address, itemname, itemprice, itemamt, total;
+    private TextView name, phoneno, address, itemname, itemprice, itemamt, total, date;
     private Order object1;
 
     @Override
@@ -27,6 +27,7 @@ public class OrderDetails extends AppCompatActivity {
         itemprice = (TextView)findViewById(R.id.orderitemprice);
         itemamt = (TextView)findViewById(R.id.orderitemamt);
         total = (TextView)findViewById(R.id.orderitemtotal);
+        date = (TextView)findViewById(R.id.orderdate);
 
         object1 = (Order)getIntent().getSerializableExtra("object1");
 
@@ -38,13 +39,14 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
 
+        date.setText("Date: " + object1.getDate());
         name.setText("Name: " + object1.getName());
         phoneno.setText("Phone Number: " + object1.getPhoneno());
         address.setText("Address: " + object1.getAddress());
-        itemamt.setText("Item Amount: " + object1.getAmount());
-        itemname.setText("Item Name: " + object1.getTitle());
-        itemprice.setText("Item Price(RM): " + object1.getPrice());
-        total.setText("Total Price(RM): " + object1.getTotal());
+        itemamt.setText("x" + object1.getAmount().replaceAll(",","\nx"));
+        itemname.setText(object1.getTitle().replaceAll(",","\n"));
+        itemprice.setText(object1.getPrice().replaceAll(",","\n"));
+        total.setText(String.format("%.2f", object1.getTotal()));
 
     }
 }

@@ -42,7 +42,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.txt_orderid.setText(new StringBuilder("Order ID: ").
                 append(orders.get(position).getOrderid()));
         holder.txt_totalprice.setText(new StringBuilder("Total Price(RM): ").
-                append(orders.get(position).getTotal()));
+                append(String.format("%.2f", orders.get(position).getTotal())));
 
         holder.txt_orderid.setOnClickListener(new View.OnClickListener() {
             @Override

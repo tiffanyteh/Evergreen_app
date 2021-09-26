@@ -80,7 +80,7 @@ public class signup extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
                                                         User user = new User(edtName.getText().toString(),
-                                                                edtPassword1.getText().toString(),edtEmail.getText().toString(),"","",
+                                                                edtEmail.getText().toString(),"","",
                                                                 "https://firebasestorage.googleapis.com/v0/b/evergreen-af6a9.appspot.com/o/" +
                                                                         "images%2Fprofile1.png?alt=media&token=860e24e0-b23a-40c2-a3f9-423e7425a327");
                                                         table_user.child(firebaseUser.getUid()).setValue(user);
