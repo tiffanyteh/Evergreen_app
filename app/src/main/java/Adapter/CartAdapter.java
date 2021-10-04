@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.example.myapplication.Cart;
 import Domain.CartItem;
 import Domain.Common;
 import com.example.myapplication.R;
+import com.example.myapplication.ShowDetails;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,6 +74,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                 notifyDataSetChanged();
                             }
                         }
+                        Toast.makeText(holder.itemView.getContext(), "Item removed from cart", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (holder.itemView.getContext(), Cart.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         holder.itemView.getContext().startActivity(intent);
@@ -141,6 +144,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     numberOrder = numberOrder - 1;
                     priceOrder = priceOrder - cartItemList.get(position).getOriprice();
                     holder.txt_price.setText(String.format("%.2f", priceOrder));
+                }
+                else{
+                    Toast.makeText(holder.itemView.getContext(), "Item quantity must be more than 1", Toast.LENGTH_SHORT).show();
                 }
                 holder.txt_amount.setText(String.valueOf(numberOrder));
                 FirebaseDatabase database = FirebaseDatabase.getInstance();

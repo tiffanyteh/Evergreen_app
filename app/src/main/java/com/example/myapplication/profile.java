@@ -124,6 +124,7 @@ public class profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
+                Toast.makeText(profile.this, "You are now logged out.", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(profile.this, MainActivity.class);
                 startActivity(i);
             }

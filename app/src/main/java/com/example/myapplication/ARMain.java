@@ -47,7 +47,7 @@ public class ARMain extends AppCompatActivity {
 
         object = (PlantDomain) getIntent().getSerializableExtra("object");
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
-
+        Toast.makeText(ARMain.this, "Tap on the plane to place the model", Toast.LENGTH_SHORT).show();
         setUpModel();
         setUpPlane();
 
@@ -77,6 +77,7 @@ public class ARMain extends AppCompatActivity {
                 }else{
                     setUpPlane1();
                 }
+                Toast.makeText(ARMain.this, "Tap on the plane to place the model", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -102,7 +103,7 @@ public class ARMain extends AppCompatActivity {
                 }else{
                     setUpPlane2();
                 }
-
+                Toast.makeText(ARMain.this, "Tap on the plane to place the model", Toast.LENGTH_SHORT).show();
             }
         });
 

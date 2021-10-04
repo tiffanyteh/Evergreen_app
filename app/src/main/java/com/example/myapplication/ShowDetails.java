@@ -162,8 +162,11 @@ public class ShowDetails extends AppCompatActivity {
             public void onClick(View v) {
                 if(numberOrder>1){
                     numberOrder = numberOrder - 1;
+                    numberOrderTxt.setText(String.valueOf(numberOrder));
+                }else{
+                    Toast.makeText(ShowDetails.this, "Item quantity must be more than 1", Toast.LENGTH_SHORT).show();
                 }
-                numberOrderTxt.setText(String.valueOf(numberOrder));
+
             }
         });
 
