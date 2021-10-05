@@ -62,19 +62,26 @@ public class login extends AppCompatActivity {
                 passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //extract mail and send link
-                        String mail = resetMail.getText().toString();
-                        firebaseAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(login.this, "Reset link sent to your email", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(login.this, "Error, reset link is not sent", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
+                        if(validate1(resetMail.getText().toString())){
+                            Toast.makeText(login.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            //extract mail and send link
+                            String mail = resetMail.getText().toString();
+                            firebaseAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(login.this, "Reset link sent to your email", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(login.this, "Error, reset link is not sent", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
                     }
                 });
 
@@ -94,7 +101,7 @@ public class login extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(edtName.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()){
+                        if(validate(edtName.getText().toString(), edtPassword.getText().toString())){
                             mDialog.dismiss();
                             Toast.makeText(login.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                         }
@@ -143,4 +150,23 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
+    public static Boolean validate(String email, String password){
+        if(email.isEmpty() || password.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static Boolean validate1(String email){
+        if(email.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }

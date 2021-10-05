@@ -50,30 +50,36 @@ public class Cart extends AppCompatActivity {
         btn_place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference table_user = database.getReference("User").
-                        child(firebaseUser.getUid());
-                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String title = dataSnapshot.child("address").getValue(String.class);
-                        if(!title.isEmpty()){
-                            Intent i = new Intent(Cart.this, Payment.class);
-                            startActivity(i);
+
+                if(validate1(totalprice.getText().toString())){
+                    Toast.makeText(Cart.this, "No items to be placed as an order",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference table_user = database.getReference("User").
+                            child(firebaseUser.getUid());
+                    table_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String title = dataSnapshot.child("address").getValue(String.class);
+                            if(validate(title)){
+                                Toast.makeText(Cart.this, "No Address Provided in Profile",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Intent i = new Intent(Cart.this, Payment.class);
+                                startActivity(i);
+
+                            }
                         }
-                        else{
-                            Toast.makeText(Cart.this, "No Address Provided in Profile",
-                                    Toast.LENGTH_SHORT).show();
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
+                    });
+                }
             }
         });
 
@@ -114,6 +120,24 @@ public class Cart extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static Boolean validate(String address){
+        if(address.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static Boolean validate1(String price){
+        if(price.equals("Total Price: RM0.00")){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

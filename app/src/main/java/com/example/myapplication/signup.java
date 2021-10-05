@@ -29,6 +29,7 @@ public class signup extends AppCompatActivity {
     ImageButton btnSignUp1;
     private FirebaseAuth firebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +57,7 @@ public class signup extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(edtName.getText().toString().isEmpty() || edtEmail.getText().toString().isEmpty() ||
-                        edtPassword1.getText().toString().isEmpty()){
+                        if(validate(edtName.getText().toString(),edtEmail.getText().toString(),edtPassword1.getText().toString())){
                             mDialog.dismiss();
                             Toast.makeText(signup.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                         }
@@ -114,6 +114,15 @@ public class signup extends AppCompatActivity {
 
             }
         });
+    }
+
+    public static Boolean validate(String username, String email, String password){
+        if(username.isEmpty() || email.isEmpty() || password.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

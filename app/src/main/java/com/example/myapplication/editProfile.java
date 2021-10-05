@@ -70,20 +70,20 @@ public class editProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(!Common.currentUser.getPhoneno().equals(phoneno.getText().toString())){
+                if(validate(Common.currentUser.getPhoneno(),phoneno.getText().toString())){
                     reference.child(firebaseUser.getUid()).child("phoneno").
                             setValue(phoneno.getText().toString());
                     Common.currentUser.setPhoneno(phoneno.getText().toString());
                 }
 
-                if(!Common.currentUser.getName().equals(username.getText().toString())){
+                if(validate1(Common.currentUser.getName(),username.getText().toString())){
                     reference.child(firebaseUser.getUid()).child("name").
                             setValue(username.getText().toString());
                     Common.currentUser.setName(username.getText().toString());
 
                 }
 
-                if(!Common.currentUser.getAddress().equals(address.getText().toString())){
+                if(validate2(Common.currentUser.getAddress(),address.getText().toString())){
                     reference.child(firebaseUser.getUid()).child("address").
                             setValue(address.getText().toString());
                     Common.currentUser.setAddress(address.getText().toString());
@@ -98,5 +98,32 @@ public class editProfile extends AppCompatActivity {
 
         });
 
+    }
+
+    public static Boolean validate(String cphoneno, String phoneno){
+        if(!cphoneno.equals(phoneno)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static Boolean validate1(String cname, String name){
+        if(!cname.equals(name)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static Boolean validate2(String caddress, String address){
+        if(!caddress.equals(address)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

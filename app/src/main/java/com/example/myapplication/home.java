@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,10 +82,16 @@ public class home extends AppCompatActivity {
         searchicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String value = searchplant.getText().toString();
-                Intent i = new Intent(home.this, SearchList.class);
-                i.putExtra("key",value);
-                startActivity(i);
+                if(validate(searchplant.getText().toString())){
+                    Toast.makeText(home.this, "Please enter a search keyword", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String value = searchplant.getText().toString();
+                    Intent i = new Intent(home.this, SearchList.class);
+                    i.putExtra("key",value);
+                    startActivity(i);
+                }
+
             }
         });
 
@@ -183,6 +190,15 @@ public class home extends AppCompatActivity {
         recyclerViewCategoryList.setAdapter(adapter);
 
 
+    }
+
+    public static Boolean validate(String keyword){
+        if(keyword.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
 
