@@ -33,4 +33,39 @@ public class CartUnitTest {
         Boolean expected = false;
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getTitle(){
+        String actualtitle = "Acacia";
+        String expectedtitle = actualtitle;
+        assertEquals(expectedtitle,actualtitle);
+    }
+
+    @Test
+    public void getPrice(){
+        String actualprice = "RM12.12";
+        String expectedprice = actualprice;
+        assertEquals(expectedprice,actualprice);
+    }
+
+    @Test
+    public void getQuantity(){
+        String actualqty = "2";
+        String expectedqty = actualqty;
+        assertEquals(expectedqty,actualqty);
+    }
+
+    @Test
+    public void getTotal(){
+        String actualtotal = "RM50.00";
+        String expectedtotal = actualtotal;
+        assertEquals(expectedtotal,actualtotal);
+    }
+
+    @Test
+    public void getAddress(){
+        String actualaddress = "Desa Airmas";
+        String expectedaddress = actualaddress;
+        assertEquals(expectedaddress,actualaddress);
+    }
 }

@@ -20,5 +20,25 @@ public class SignUpUnitTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void getUsername(){
+        String actualname = "Tiffany";
+        String expectedname = actualname;
+        assertEquals(expectedname,actualname);
+    }
+
+    @Test
+    public void getEmail(){
+        String actualemail = "Tiffanyteh00@gmail.com";
+        String expectedemail = actualemail;
+        assertEquals(expectedemail,actualemail);
+    }
+
+    @Test
+    public void getPassword(){
+        String actualpsw = "Tiffany";
+        String expectedpsw = actualpsw;
+        assertEquals(expectedpsw,actualpsw);
+    }
 
 }

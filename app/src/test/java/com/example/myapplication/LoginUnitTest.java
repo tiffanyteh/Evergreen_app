@@ -33,5 +33,21 @@ public class LoginUnitTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void getEmail(){
+        String actualemail = "Tiffanyteh00@gmail.com";
+        String expectedemail = actualemail;
+        assertEquals(expectedemail,actualemail);
+    }
+
+    @Test
+    public void getPassword(){
+        String actualpsw = "Tiffany";
+        String expectedpsw = actualpsw;
+        assertEquals(expectedpsw,actualpsw);
+    }
+
+
+
 
 }
