@@ -180,8 +180,8 @@ public class ARMain extends AppCompatActivity {
 
     private void createModel(AnchorNode anchorNode){
         TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
-        node.getScaleController().setMaxScale(0.5f);
-        node.getScaleController().setMinScale(0.4f);
+        node.getScaleController().setMaxScale(0.3f);
+        node.getScaleController().setMinScale(0.2f);
         node.setParent(anchorNode);
         node.setRenderable(modelRenderable);
         node.select();
@@ -190,8 +190,8 @@ public class ARMain extends AppCompatActivity {
 
     private void createModel1(AnchorNode anchorNode){
         TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
-        node.getScaleController().setMaxScale(1.0f);
-        node.getScaleController().setMinScale(0.9f);
+        node.getScaleController().setMaxScale(0.6f);
+        node.getScaleController().setMinScale(0.5f);
         node.setParent(anchorNode);
         node.setRenderable(modelRenderable);
         node.select();
@@ -200,8 +200,8 @@ public class ARMain extends AppCompatActivity {
 
     private void createModel2(AnchorNode anchorNode){
         TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
-        node.getScaleController().setMaxScale(1.5f);
-        node.getScaleController().setMinScale(1.4f);
+        node.getScaleController().setMaxScale(0.8f);
+        node.getScaleController().setMinScale(0.7f);
         node.setParent(anchorNode);
         node.setRenderable(modelRenderable);
         node.select();

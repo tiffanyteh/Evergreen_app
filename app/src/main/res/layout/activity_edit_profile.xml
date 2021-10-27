@@ -18,22 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edit"
-        android:hint="Username"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilepic"
-        app:layout_constraintVertical_bias="0.074" />
 
     <EditText
         android:id="@+id/phoneno"
@@ -51,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/profilepic"
         app:layout_constraintVertical_bias="0.048" />
 
     <EditText

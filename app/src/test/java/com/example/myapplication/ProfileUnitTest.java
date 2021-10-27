@@ -20,19 +20,6 @@ public class ProfileUnitTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void validate_name() {
-        Boolean actual = editProfile.validate1("Tiffany","Tiffany00");
-        Boolean expected = true;
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void validate_name1() {
-        Boolean actual = editProfile.validate1("Tiffany", "Tiffany");
-        Boolean expected = false;
-        assertEquals(expected, actual);
-    }
 
     @Test
     public void validate_address() {
@@ -55,12 +42,6 @@ public class ProfileUnitTest {
         assertEquals(expectedaddress,actualaddress);
     }
 
-    @Test
-    public void getUsername(){
-        String actualusername = "Tiffany";
-        String expectedusername = actualusername;
-        assertEquals(expectedusername,actualusername);
-    }
 
     @Test
     public void getPhoneNo(){

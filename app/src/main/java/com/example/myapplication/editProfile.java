@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 import Domain.Common;
 
 public class editProfile extends AppCompatActivity {
-    EditText username, phoneno, address;
+    EditText phoneno, address;
     ImageButton updatebtn;
     ImageView pic;
 
@@ -38,13 +38,11 @@ public class editProfile extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference("User");
 
-        username = (EditText)findViewById(R.id.username);
         phoneno = (EditText)findViewById(R.id.phoneno);
         updatebtn = (ImageButton)findViewById(R.id.updatebtn);
         address = (EditText)findViewById(R.id.address);
         pic = (ImageView)findViewById(R.id.profilepic);
 
-        username.setText(Common.currentUser.getName());
         phoneno.setText(Common.currentUser.getPhoneno());
         address.setText(Common.currentUser.getAddress());
         firebaseAuth = FirebaseAuth.getInstance();
@@ -76,13 +74,6 @@ public class editProfile extends AppCompatActivity {
                     Common.currentUser.setPhoneno(phoneno.getText().toString());
                 }
 
-                if(validate1(Common.currentUser.getName(),username.getText().toString())){
-                    reference.child(firebaseUser.getUid()).child("name").
-                            setValue(username.getText().toString());
-                    Common.currentUser.setName(username.getText().toString());
-
-                }
-
                 if(validate2(Common.currentUser.getAddress(),address.getText().toString())){
                     reference.child(firebaseUser.getUid()).child("address").
                             setValue(address.getText().toString());
@@ -109,14 +100,6 @@ public class editProfile extends AppCompatActivity {
         }
     }
 
-    public static Boolean validate1(String cname, String name){
-        if(!cname.equals(name)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     public static Boolean validate2(String caddress, String address){
         if(!caddress.equals(address)){
