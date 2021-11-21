@@ -72,6 +72,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                 Acacia.getRef().removeValue();
                                 cartItemList.remove(position);
                                 notifyDataSetChanged();
+                                break;
                             }
                         }
                         Toast.makeText(holder.itemView.getContext(), "Item removed from cart", Toast.LENGTH_SHORT).show();

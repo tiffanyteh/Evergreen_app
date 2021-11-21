@@ -184,16 +184,17 @@ public class ShowDetails extends AppCompatActivity {
                         if(dataSnapshot.exists()){
                             for(DataSnapshot Acacia: dataSnapshot.getChildren()){
                                 String planttitle = Acacia.child("name").getValue(String.class);
+                                int amount = Acacia.child("amount").getValue(Integer.class);
+                                Double subprice = Acacia.child("price").getValue(Double.class);
                                 if(planttitle.equals(titleTxt.getText().toString())){
-                                    Acacia.getRef().removeValue();
-                                    Double subprice = Double.parseDouble(priceTxt.getText().toString())
+                                    Double subprice1 = Double.parseDouble(priceTxt.getText().toString())
                                             * Integer.parseInt(numberOrderTxt.getText().toString());
-
+                                    Double total = subprice1 + subprice;
+                                    int amount1 = amount + Integer.parseInt(numberOrderTxt.getText().toString());
                                     CartItem cartItem = new CartItem(titleTxt.getText().toString(),
-                                            subprice,
-                                            Integer.parseInt(numberOrderTxt.getText().toString()),
+                                            total, amount1,
                                             object.getPic(), Double.parseDouble(priceTxt.getText().toString()));
-                                    table_cart.child(Common.currentUser.getName()).push().setValue(cartItem);
+                                    Acacia.getRef().setValue(cartItem);
                                     count = count + 1;
                                     Toast.makeText(ShowDetails.this, "Item Added to Cart!",
                                             Toast.LENGTH_SHORT).show();

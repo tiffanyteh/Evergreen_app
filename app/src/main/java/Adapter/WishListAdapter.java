@@ -80,9 +80,11 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
                             if(planttitle.equals(tree.get(position).getTitle())){
                                 Acacia.getRef().removeValue();
                                 tree.remove(position);
-                                notifyDataSetChanged();
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, tree.size());
                                 Toast.makeText(holder.itemView.getContext(), "Item Removed From Wishlist",
                                         Toast.LENGTH_SHORT).show();
+                                break;
                             }
                         }
 
